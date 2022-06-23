@@ -1,0 +1,22 @@
+#docker-composeで使用するバージョン
+version: '3.8'
+
+# dbデータの保存場所。(ホストからは見えない)
+# volumes:
+#   mysql-data:
+
+services:
+ #サービスの名前
+  centos:
+    build: .
+    ports:
+    - 9999:9999
+    volumes:
+    - ./html:/var/www/html:cached
+    # - mysql-data:/var/lib/mysql
+    working_dir: /var/www/html
+    tty: true
+    platform: linux/x86_64
+    privileged: true  
+    command: /sbin/init
+
